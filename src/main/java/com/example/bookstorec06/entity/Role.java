@@ -1,4 +1,4 @@
-package com.example.book_store_user_account.entity;
+package com.example.bookstorec06.entity;
 
 public enum Role {
     USER,

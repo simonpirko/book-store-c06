@@ -1,6 +1,6 @@
-package com.example.book_store_user_account.repository;
+package com.example.bookstorec06.repository;
 
-import com.example.book_store_user_account.entity.User;
+import com.example.bookstorec06.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
