@@ -38,4 +38,21 @@ public class UserService {
         byId.setRole(role);
         userRepository.save(byId);
     }
+  
+    public boolean existsByUsernameAndPassword(String username, String password) {
+        return userRepository.existsByUsernameAndPassword(username, password);
+    }
+  
+    public void updateUsername(long id, String newUsername){
+        userRepository.updateUsername(id, newUsername);
+    }
+
+    public  void updatePassword(long id, String newPassword){
+        userRepository.updatePassword(id, newPassword);
+    }
+
+    public void delete(long id){
+        userRepository.deleteById(id);
+    }
+  
 }
