@@ -1,12 +1,12 @@
-package com.example.book_store_user_account.exception;
+package com.example.bookstorec06.exception;
 
-public class UserNotFoundException extends RuntimeException{
+public class MyNotFoundException extends RuntimeException {
 
-    public UserNotFoundException() {
+    public MyNotFoundException() {
+        
     }
-
-    public UserNotFoundException(String message) {
+    public MyNotFoundException(String message) {
         super(message);
     }
-
 }
+
