@@ -1,8 +1,8 @@
-package com.example.book_store_user_account.controller;
+package com.example.bookstorec06.controller;
 
-import com.example.book_store_user_account.entity.User;
-import com.example.book_store_user_account.exception.UserNotFoundException;
-import com.example.book_store_user_account.service.UserService;
+import com.example.bookstorec06.entity.User;
+import com.example.bookstorec06.exception.MyNotFoundException;
+import com.example.bookstorec06.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -51,7 +51,7 @@ public class UserAccountController {
         User userBySession = (User) model.getAttribute("user");
         if (userBySession == null) {
             session.setComplete();
-            throw new UserNotFoundException("Something going wrong.Please sign in again and try one more time.");
+            throw new MyNotFoundException("Something going wrong. Please sign in again and try one more time.");
         }
         if (!existsNewUsername & existsUsernameAndPassword) {
             userService.updateUsername(userBySession.getId(), newUsername);
@@ -82,7 +82,7 @@ public class UserAccountController {
 
         boolean existsUser = userService.existsByUsernameAndPassword(user.getUsername(), user.getPassword());
         if (existsUser) {
-            User userByUsername = userService.getByUsername(user.getUsername()).get();
+            User userByUsername = userService.findByUsername(user.getUsername()).get();
             userService.updatePassword(userByUsername.getId(), newPassword);
             session.setComplete();
             model.addAttribute("reLogin", "Please sign in with new username or password");
@@ -110,7 +110,7 @@ public class UserAccountController {
     public String removeAccountPost(Model model, SessionStatus session) {
         User user = (User) model.getAttribute("user");
         if (user == null)
-            throw new UserNotFoundException("Something going wrong.Please sign in again and try one more time.");
+            throw new MyNotFoundException("Something going wrong. Please sign in again and try one more time.");
         userService.delete(user.getId());
         session.setComplete();
         return "home";
@@ -122,4 +122,6 @@ public class UserAccountController {
         return "home";
     }
 }
+
+
 
