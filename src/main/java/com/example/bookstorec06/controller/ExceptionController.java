@@ -1,14 +1,11 @@
-package com.example.book_store_user_account.controller;
+package com.example.bookstorec06.controller;
 
-import com.example.book_store_user_account.exception.UserNotFoundException;
-
+import com.example.bookstorec06.exception.MyNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-import org.thymeleaf.exceptions.TemplateEngineException;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
@@ -16,10 +13,10 @@ import java.time.format.DateTimeFormatter;
 
 @ControllerAdvice
 public class ExceptionController extends ResponseEntityExceptionHandler {
-  private final DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+    private final DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 
-    @ExceptionHandler(UserNotFoundException.class)
-    public ModelAndView userNotFound(HttpServletRequest req, UserNotFoundException ex) {
+    @ExceptionHandler(MyNotFoundException.class)
+    public ModelAndView userNotFound(HttpServletRequest req, MyNotFoundException ex) {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("Error");
         mav.addObject("exception", ex.getMessage());
@@ -29,26 +26,11 @@ public class ExceptionController extends ResponseEntityExceptionHandler {
         return mav;
     }
 
-    @ExceptionHandler(HttpClientErrorException.class)
-    public ModelAndView clientErrorEx(HttpClientErrorException ex) {
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("Error");
-        return mav;
-    }
-
     @ExceptionHandler(RuntimeException.class)
-    public ModelAndView runtimeEx(RuntimeException ex){
+    public ModelAndView runtimeEx(RuntimeException ex) {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("Error");
         return mav;
     }
-
-    @ExceptionHandler(TemplateEngineException.class)
-    public ModelAndView templateEx(TemplateEngineException ex){
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("Error");
-        return mav;
-    }
-
 }
 
